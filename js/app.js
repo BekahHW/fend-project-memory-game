@@ -1,7 +1,40 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cards= [
+  {
+    name: 'diamond',
+    icon: 'fa fa-diamond'
+  },
+  {
+    name: 'plane',
+    icon: 'fa fa-paper-plane-o'
+  },
+  {
+    name: 'bolt',
+    icon: 'fa fa-bolt'
+  },
+  {
+    name: 'cube',
+    icon: 'fa fa-cube'
+  },
+  {
+    name: 'anchor'
+    icon: 'fa fa-anchor'
+  },
+  {
+    name: 'leaf',
+    icon: 'fa fa-leaf'
+  },
+  {
+    name: 'bicycle',
+    icon: 'fa fa-bicycle'
+  },
+  {
+    name: 'bomb',
+    icon: 'fa fa-bomb'
+  };
+]
 
 /*
  * Display the cards on the page
@@ -11,14 +44,14 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(cards) {
+    var currentIndex = cards.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
+        temporaryValue = cards[currentIndex];
+        array[currentIndex] = cards[randomIndex];
         array[randomIndex] = temporaryValue;
     }
 
