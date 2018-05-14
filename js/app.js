@@ -104,24 +104,21 @@ shuffledCards.map(card => (
     `)
 ))}
 )};
+$(document).ready(function(){
 
 displayCards(cards);
 
-// counter
-// start count=0; card on click function add 1 to counterl
-function countMoves() {
-let count = 0;
-
+// countMoves();
 $('.card').click(function() {
-    count++;
-    $('.moves').prepend(0+count);
-});}
+    $('.moves').html(function(i, val) { return val*1+1 });
+});
 
+});
 
 function displaySymbol() {
   $('card').click(function(){
   // the icon needs to be activated
-}))}
+})};
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
