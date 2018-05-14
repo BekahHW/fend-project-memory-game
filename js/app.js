@@ -19,7 +19,7 @@ const cards= [
     icon: 'fa fa-cube'
   },
   {
-    name: 'anchor'
+    name: 'anchor',
     icon: 'fa fa-anchor'
   },
   {
@@ -33,8 +33,55 @@ const cards= [
   {
     name: 'bomb',
     icon: 'fa fa-bomb'
-  };
+  },
+  {
+    name: 'diamond',
+    icon: 'fa fa-diamond'
+  },
+  {
+    name: 'plane',
+    icon: 'fa fa-paper-plane-o'
+  },
+  {
+    name: 'bolt',
+    icon: 'fa fa-bolt'
+  },
+  {
+    name: 'cube',
+    icon: 'fa fa-cube'
+  },
+  {
+    name: 'anchor',
+    icon: 'fa fa-anchor'
+  },
+  {
+    name: 'leaf',
+    icon: 'fa fa-leaf'
+  },
+  {
+    name: 'bicycle',
+    icon: 'fa fa-bicycle'
+  },
+  {
+    name: 'bomb',
+    icon: 'fa fa-bomb'
+  }
 ]
+
+function shuffle(array) {
+   var currentIndex = array.length, temporaryValue, randomIndex;
+
+   while (currentIndex !== 0) {
+       randomIndex = Math.floor(Math.random() * currentIndex);
+       currentIndex -= 1;
+       temporaryValue = array[currentIndex];
+       array[currentIndex] = array[randomIndex];
+       array[randomIndex] = temporaryValue;
+   }
+
+   return array;
+}
+
 
 /*
  * Display the cards on the page
@@ -42,22 +89,23 @@ const cards= [
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
+ function displayCards(cards) {
+     $( '.restart' ).on( 'click',
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(cards) {
-    var currentIndex = cards.length, temporaryValue, randomIndex;
+ function () {
+   $('.deck').html('')
+   const shuffledCards = shuffle(cards)
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = cards[currentIndex];
-        array[currentIndex] = cards[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+shuffledCards.map(card => (
+  $('.deck').append(`
+    <li class="card">
+        <i class="fa ${card.icon}"></i>
+    </li>
+    `)
+))}
+)};
 
-    return array;
-}
-
+displayCards(cards);
 
 /*
  * set up the event listener for a card. If a card is clicked:
