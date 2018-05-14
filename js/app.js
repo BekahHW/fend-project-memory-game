@@ -107,6 +107,18 @@ shuffledCards.map(card => (
 
 displayCards(cards);
 
+// counter
+// start count=0; card on click function add 1 to counterl
+function countMoves() {
+let count = 0;
+
+$('.card').click(function() {
+    count++;
+    $('.moves').prepend(0+count);
+});}
+
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
