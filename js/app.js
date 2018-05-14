@@ -118,7 +118,10 @@ $('.card').click(function() {
 });}
 
 
-
+function displaySymbol() {
+  $('card').click(function(){
+  // the icon needs to be activated
+}))}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
