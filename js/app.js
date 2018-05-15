@@ -73,6 +73,17 @@ function activateCards() {
   $('.card').click(function() {
       $('.moves').html(function(i, val) { return val*1+1 });
       $(this).addClass('open show');
+
+// needs to compare two cards clicked immediately after each other
+let card1 = $(this).attr('name');
+
+if (card1 = ${'card.name'})
+{
+  $(this).removeClass('open show');
+  $(this).addClass('match');
+}
+else {$(this).removeClass('open show');
+    $(this).addClass('card');}
   });
 }
 
@@ -108,6 +119,7 @@ function shuffle(array) {
       $('.deck').append(`
         <li class="card">
             <i class="fa ${card.icon}"></i>
+            <i class="fa ${card.name}"</i>
         </li>
         `)
       ))
