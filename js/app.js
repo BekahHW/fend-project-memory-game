@@ -68,6 +68,14 @@ const cards= [
   }
 ]
 
+function activateCards() {
+  // countMoves();
+  $('.card').click(function() {
+      $('.moves').html(function(i, val) { return val*1+1 });
+      $(this).addClass('open show');
+  });
+}
+
 function shuffle(array) {
    var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -90,35 +98,29 @@ function shuffle(array) {
  *   - add each card's HTML to the page
  */
  function displayCards(cards) {
-     $( '.restart' ).on( 'click',
-// Shuffle function from http://stackoverflow.com/a/2450976
- function () {
-   $('.deck').html('')
-   const shuffledCards = shuffle(cards)
+   $( '.restart' ).on( 'click',
+   // Shuffle function from http://stackoverflow.com/a/2450976
+   function () {
+     $('.deck').html('')
+     const shuffledCards = shuffle(cards)
 
-shuffledCards.map(card => (
-  $('.deck').append(`
-    <li class="card">
-        <i class="fa ${card.icon}"></i>
-    </li>
-    `)
-))}
+     shuffledCards.map(card => (
+      $('.deck').append(`
+        <li class="card">
+            <i class="fa ${card.icon}"></i>
+        </li>
+        `)
+      ))
+      activateCards()
+    }
 )};
+
 $(document).ready(function(){
-
-displayCards(cards);
-
-// countMoves();
-$('.card').click(function() {
-    $('.moves').html(function(i, val) { return val*1+1 });
+  displayCards(cards);
+  activateCards();
 });
+// function displaySymbol() {
 
-});
-
-function displaySymbol() {
-  $('card').click(function(){
-  // the icon needs to be activated
-})};
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
