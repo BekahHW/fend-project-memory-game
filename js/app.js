@@ -68,24 +68,44 @@ const cards= [
   }
 ]
 
+let moves
+
+function stars(){
+if (moves > 8 && moves < 20) {
+  $('.stars').removeClass('fa fa-star')
+} else if (moves>20) {
+  $('.stars').removeClass('fa fa-star')
+} else {
+  $('.stars').removeClass('fa fa-star')
+}
+}
+
 function activateCards() {
-  // countMoves();
+// change css based on match
   $('.card').click(function() {
-      $('.moves').html(function(i, val) { return val*1+1 });
+    moves = $('.moves').html(function(i, val) { return val*1+1 });
       $(this).addClass('open show');
 
 // needs to compare two cards clicked immediately after each other
-let card1 = $(this).attr('name');
-
-if (card1 = ${'card.name'})
-{
+let card1
+if (moves % 2 != 0) {
+  card1 = $(this).attr('name');
+  console.log('card1: ' + card1)
+}
+if(moves%2 === 0) {
+  console.log('card2: ' + $(this).attr('name'))
+  if (card1 === $(this).attr('name')) {
   $(this).removeClass('open show');
   $(this).addClass('match');
 }
-else {$(this).removeClass('open show');
-    $(this).addClass('card');}
+else {
+  $(this).removeClass('open show');
+    }
+}
+
   });
 }
+
 
 function shuffle(array) {
    var currentIndex = array.length, temporaryValue, randomIndex;
@@ -117,9 +137,8 @@ function shuffle(array) {
 
      shuffledCards.map(card => (
       $('.deck').append(`
-        <li class="card">
+        <li class="card" name="${card.name}">
             <i class="fa ${card.icon}"></i>
-            <i class="fa ${card.name}"</i>
         </li>
         `)
       ))
@@ -130,8 +149,8 @@ function shuffle(array) {
 $(document).ready(function(){
   displayCards(cards);
   activateCards();
+  stars();
 });
-// function displaySymbol() {
 
 /*
  * set up the event listener for a card. If a card is clicked:
