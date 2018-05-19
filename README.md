@@ -6,15 +6,13 @@
 * [Contributing](#contributing)
 
 ## Instructions
+This is a matching memory game. Once the player clicks the first card, a timer begins as well as a moves tracker that records how many clicks the player has taken.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+If the player clicks two cards consecutively that match, the cards will remain flipped over. If the cards do not match, both will be flipped back over until they've been matched. Once all cards have been successfully matched, the timer will stop.
 
-To get started, open `js/app.js` and start building out the app's functionality
+The player will begin the game with three stars. Once the player has clicked 20 cards, one star will be removed. After the player has clicked 32 cards, another star will be removed. If the player clicks more than 60 times, all stars will be removed.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+This repository is the a project for Udacity students. Therefore, I won't likely accept pull requests.

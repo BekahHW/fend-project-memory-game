@@ -68,43 +68,78 @@ const cards= [
   }
 ]
 
-let moves
 
-function stars(){
-if (moves > 8 && moves < 20) {
-  $('.stars').removeClass('fa fa-star')
-} else if (moves>20) {
-  $('.stars').removeClass('fa fa-star')
-} else {
-  $('.stars').removeClass('fa fa-star')
+
+
+// function stars(){
+// if (moves > 8 && moves < 20) {
+//   $('.stars').removeClass('fa fa-star')
+// } else if (moves>20) {
+//   $('.stars').removeClass('fa fa-star')
+// } else {
+//   $('.stars').removeClass('fa fa-star')
+// }
+// }
+// let moves = 0
+// //
+// function increaseMoves() {
+//   moves++;
+//   moveCounter.innerText = moves;
+//   stars();
+// }
+
+
+
+let timer = setInterval(function(){ myTimer() }, 1000);
+
+function myTimer() {
+  // if (win()) {
+  //   let timer = clearInterval(function(){ myTimer() }, 1000);
+  // } else {
+    document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
+  // }
 }
+function stopTimer() {
+  clearInterval(timer);
 }
 
 function activateCards() {
 // change css based on match
-  $('.card').click(function() {
-    moves = $('.moves').html(function(i, val) { return val*1+1 });
-      $(this).addClass('open show');
+  let card1, card2
 
-// needs to compare two cards clicked immediately after each other
-let card1
-if (moves % 2 != 0) {
-  card1 = $(this).attr('name');
-  console.log('card1: ' + card1)
+  $('.card').click(function() {
+    myTimer();
+    moves = $('.moves').html(function(i, val) { return val*1+1 });
+
+     console.log('moves:' + moves);
+    $(this).addClass('open show');
+
+if (moves.text() % 2 != 0) {
+  card1 = $(this);
 }
-if(moves%2 === 0) {
-  console.log('card2: ' + $(this).attr('name'))
-  if (card1 === $(this).attr('name')) {
+
+else if (moves.text()%2 === 0) {
+  card2 = $(this);
+  if (card1.attr('name') === $(this).attr('name')) {
   $(this).removeClass('open show');
   $(this).addClass('match');
+  card1.addClass('match');
+  card1.removeClass('open show')
+
 }
 else {
-  $(this).removeClass('open show');
-    }
+  setTimeout(function() {
+    card2.removeClass('open show');
+    card1.removeClass('open show');
+}, 800);
+  }
+
 }
 
-  });
-}
+})
+win();
+};
+
 
 
 function shuffle(array) {
@@ -146,11 +181,27 @@ function shuffle(array) {
     }
 )};
 
+
+// When a user wins the game, a modal appears to congratulate the player and ask
+// if they want to play again. It should also tell the user how much time it took
+//  to win the game, and what the star rating was.
+function win()
+ {
+  if ($('.card.match').length === 4) {
+  alert ('Congratulations! It took you seconds. You earned. Would you like to play again?');
+  console.log('amherst');
+   stopTimer();
+}
+
+}
+
 $(document).ready(function(){
   displayCards(cards);
   activateCards();
-  stars();
+  // stars();
 });
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
