@@ -77,7 +77,7 @@ const starThree = $('starThree');
 
 
 
-
+// star functions
 function removeStar(moves){
 
 if (moves > 16 && moves < 20) {
@@ -90,7 +90,7 @@ if (moves > 16 && moves < 20) {
 }
 }
 
-
+// star functions
 function addStar(){
 
   $('.one').addClass('fa fa-star');
@@ -98,6 +98,7 @@ function addStar(){
   $('.three').addClass('fa fa-star');
 }
 
+// moves functions
 function increaseMoves() {
   moves++;
   moveCounter.innerText = moves;
@@ -108,6 +109,7 @@ function resetMoves(){
   moveCounter.innerText = moves;
 }
 
+// timer
 let second = 0, minute = 0; hour = 0;
 let timer = document.querySelector(".timer");
 let interval;
@@ -127,15 +129,7 @@ function myTimer(){
     },1000);
 }
 
-// let timer = setInterval(function(){ myTimer() }, 1000);
-//
-// function myTimer() {
-//
-//     document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
-// }
-
 function resetTimer() {
-    // document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
    second = 0;
    minute = 0;
    var timer = document.querySelector(".timer");
@@ -143,8 +137,8 @@ function resetTimer() {
   clearInterval(interval);
 }
 
+// playing functions
 function activateCards() {
-// change css based on match
   let card1, card2
 
   $('.card').click(function() {
@@ -168,7 +162,6 @@ function activateCards() {
     $(this).addClass('match');
     card1.addClass('match');
     card1.removeClass('open show')
-
   }
 
   else {
@@ -201,12 +194,9 @@ function shuffle(array) {
      resetTimer();
      resetMoves();
      startNewGame(cards);
-
-     console.log('frank')
    }
 )};
 
-// Shuffle function from http://stackoverflow.com/a/2450976
 function startNewGame(cards) {
   $('.deck').html('')
   const shuffledCards = shuffle(cards)
@@ -220,15 +210,8 @@ function startNewGame(cards) {
    ))
    activateCards();
    addStar();
-   // reset moves
-
-
   }
 
-
-// When a user wins the game, a modal appears to congratulate the player and ask
-// if they want to play again. It should also tell the user how much time it took
-//  to win the game, and what the star rating was.
 function win()
  {
   if ($('.card.match').length === 16) {
@@ -241,18 +224,5 @@ function win()
 $(document).ready(function(){
   displayCards(cards);
   activateCards();
-  // startNewGame(cards);
+  startNewGame(cards);
 });
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
