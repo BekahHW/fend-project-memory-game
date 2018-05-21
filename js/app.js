@@ -68,39 +68,75 @@ const cards= [
   }
 ]
 
+const moveCounter = document.querySelector('.moves');
+let starRating =document.querySelector('.stars');
+let moves = 0
+const starOne = $('starOne');
+const starTwo = $('starTwo');
+const starThree = $('starThree');
 
 
 
-// function stars(){
-// if (moves > 8 && moves < 20) {
-//   $('.stars').removeClass('fa fa-star')
-// } else if (moves>20) {
-//   $('.stars').removeClass('fa fa-star')
-// } else {
-//   $('.stars').removeClass('fa fa-star')
-// }
-// }
-// let moves = 0
-// //
-// function increaseMoves() {
-//   moves++;
-//   moveCounter.innerText = moves;
-//   stars();
-// }
 
+function removeStar(moves){
 
-
-let timer = setInterval(function(){ myTimer() }, 1000);
-
-function myTimer() {
-  // if (win()) {
-  //   let timer = clearInterval(function(){ myTimer() }, 1000);
-  // } else {
-    document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
-  // }
+if (moves > 16 && moves < 20) {
+  console.log('eyes')
+  $('.one').removeClass('fa fa-star')
+} else if (moves>20 && moves <50) {
+  $('.two').removeClass('fa fa-star')
+} else if(moves > 50) {
+  $('.three').removeClass('fa fa-star')
 }
+}
+
+function resetStars() {
+  $('.one').addClass('fa fa-star')
+&&
+  $('.two').removeClass('fa fa-star')
+&&
+  $('.three').removeClass('fa fa-star')
+
+}
+
+
+function increaseMoves() {
+
+  moves++;
+  moveCounter.innerText = moves;
+  // removeStar();
+}
+
+// totalMoves = (.moves).getElementsbyClass
+
+let second = 0, minute = 0; hour = 0;
+let timer = document.querySelector(".timer");
+let interval;
+function myTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = minute+"mins "+second+"secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}
+
+// let timer = setInterval(function(){ myTimer() }, 1000);
+//
+// function myTimer() {
+//
+//     document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
+// }
+
 function stopTimer() {
-  clearInterval(timer);
+    // document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
+  clearInterval(interval);
 }
 
 function activateCards() {
@@ -108,17 +144,22 @@ function activateCards() {
   let card1, card2
 
   $('.card').click(function() {
-    myTimer();
-    moves = $('.moves').html(function(i, val) { return val*1+1 });
+    increaseMoves();
+    removeStar(moves);
 
-     console.log('moves:' + moves);
+    if (moves === 1) {
+      myTimer()
+    }
+
+    // moves = $('.moves').html(function(i, val) { return val*1+1 });
+
     $(this).addClass('open show');
 
-if (moves.text() % 2 != 0) {
+if (moves % 2 != 0) {
   card1 = $(this);
 }
 
-else if (moves.text()%2 === 0) {
+else if (moves%2 === 0) {
   card2 = $(this);
   if (card1.attr('name') === $(this).attr('name')) {
   $(this).removeClass('open show');
@@ -135,9 +176,9 @@ else {
   }
 
 }
-
-})
 win();
+})
+
 };
 
 
@@ -164,22 +205,33 @@ function shuffle(array) {
  *   - add each card's HTML to the page
  */
  function displayCards(cards) {
-   $( '.restart' ).on( 'click',
-   // Shuffle function from http://stackoverflow.com/a/2450976
-   function () {
-     $('.deck').html('')
-     const shuffledCards = shuffle(cards)
+   $( '.restart' ).on( 'click', function () {
+     startNewGame(cards);
+     stopTimer();
+   }
 
-     shuffledCards.map(card => (
-      $('.deck').append(`
-        <li class="card" name="${card.name}">
-            <i class="fa ${card.icon}"></i>
-        </li>
-        `)
-      ))
-      activateCards()
-    }
 )};
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function startNewGame (cards) {
+  $('.deck').html('')
+  const shuffledCards = shuffle(cards)
+
+  shuffledCards.map(card => (
+   $('.deck').append(`
+     <li class="card" name="${card.name}">
+         <i class="fa ${card.icon}"></i>
+     </li>
+     `)
+   ))
+   activateCards();
+
+   // reset moves
+      moves = 0;
+      moves.innerHTML = moves;
+
+
+  }
 
 
 // When a user wins the game, a modal appears to congratulate the player and ask
@@ -187,10 +239,11 @@ function shuffle(array) {
 //  to win the game, and what the star rating was.
 function win()
  {
-  if ($('.card.match').length === 4) {
-  alert ('Congratulations! It took you seconds. You earned. Would you like to play again?');
-  console.log('amherst');
-   stopTimer();
+  if ($('.card.match').length === 16) {
+    stopTimer();
+  alert (`'Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?'`);
+  startNewGame(cards)
+  stopTimer();
 }
 
 }
@@ -198,7 +251,7 @@ function win()
 $(document).ready(function(){
   displayCards(cards);
   activateCards();
-  // stars();
+  startNewGame(cards);
 });
 
 
