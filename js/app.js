@@ -176,6 +176,7 @@ win();
 
 };
 
+// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
    var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -218,7 +219,6 @@ function win()
   alert (`Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?`);
   startNewGame(cards)
 }
-
 }
 
 $(document).ready(function(){
