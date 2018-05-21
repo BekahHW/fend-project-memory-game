@@ -75,8 +75,6 @@ const starOne = $('starOne');
 const starTwo = $('starTwo');
 const starThree = $('starThree');
 
-
-
 // star functions
 function removeStar(moves){
 
@@ -90,7 +88,6 @@ if (moves > 16 && moves < 20) {
 }
 }
 
-// star functions
 function addStar(){
 
   $('.one').addClass('fa fa-star');
