@@ -90,28 +90,17 @@ if (moves > 16 && moves < 20) {
 }
 }
 
-function resetStars() {
-  $('.one').addClass('fa fa-star')
-&&
-  $('.two').removeClass('fa fa-star')
-&&
-  $('.three').removeClass('fa fa-star')
-
-}
-
 
 function increaseMoves() {
 
   moves++;
   moveCounter.innerText = moves;
-  // removeStar();
 }
-
-// totalMoves = (.moves).getElementsbyClass
 
 let second = 0, minute = 0; hour = 0;
 let timer = document.querySelector(".timer");
 let interval;
+
 function myTimer(){
     interval = setInterval(function(){
         timer.innerHTML = minute+"mins "+second+"secs";
@@ -208,12 +197,14 @@ function shuffle(array) {
    $( '.restart' ).on( 'click', function () {
      startNewGame(cards);
      stopTimer();
+
+     console.log('frank')
    }
 
 )};
 
 // Shuffle function from http://stackoverflow.com/a/2450976
-function startNewGame (cards) {
+function startNewGame(cards) {
   $('.deck').html('')
   const shuffledCards = shuffle(cards)
 
@@ -227,9 +218,8 @@ function startNewGame (cards) {
    activateCards();
 
    // reset moves
-      moves = 0;
-      moves.innerHTML = moves;
-
+   moves = 0;
+   moves.innerHTML = moves;
 
   }
 
@@ -241,7 +231,7 @@ function win()
  {
   if ($('.card.match').length === 16) {
     stopTimer();
-  alert (`'Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?'`);
+  alert (`Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?`);
   startNewGame(cards)
   stopTimer();
 }
