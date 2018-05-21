@@ -123,8 +123,12 @@ function myTimer(){
 //     document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
 // }
 
-function stopTimer() {
+function resetTimer() {
     // document.querySelector('.timer').innerHTML = ('Timer: ' + timer++);
+   second = 0;
+   minute = 0;
+   var timer = document.querySelector(".timer");
+   timer.innerHTML = "0 mins 0 secs";
   clearInterval(interval);
 }
 
@@ -144,33 +148,32 @@ function activateCards() {
 
     $(this).addClass('open show');
 
-if (moves % 2 != 0) {
-  card1 = $(this);
-}
-
-else if (moves%2 === 0) {
-  card2 = $(this);
-  if (card1.attr('name') === $(this).attr('name')) {
-  $(this).removeClass('open show');
-  $(this).addClass('match');
-  card1.addClass('match');
-  card1.removeClass('open show')
-
-}
-else {
-  setTimeout(function() {
-    card2.removeClass('open show');
-    card1.removeClass('open show');
-}, 800);
+  if (moves % 2 != 0) {
+    card1 = $(this);
   }
+
+  else if (moves%2 === 0) {
+    card2 = $(this);
+    if (card1.attr('name') === $(this).attr('name')) {
+    $(this).removeClass('open show');
+    $(this).addClass('match');
+    card1.addClass('match');
+    card1.removeClass('open show')
+
+  }
+
+  else {
+    setTimeout(function() {
+      card2.removeClass('open show');
+      card1.removeClass('open show');
+  }, 800);
+    }
 
 }
 win();
 })
 
 };
-
-
 
 function shuffle(array) {
    var currentIndex = array.length, temporaryValue, randomIndex;
@@ -182,7 +185,6 @@ function shuffle(array) {
        array[currentIndex] = array[randomIndex];
        array[randomIndex] = temporaryValue;
    }
-
    return array;
 }
 
@@ -195,8 +197,11 @@ function shuffle(array) {
  */
  function displayCards(cards) {
    $( '.restart' ).on( 'click', function () {
+     resetTimer();
+     moves = 0;
+     moves.innerHTML = moves;
      startNewGame(cards);
-     stopTimer();
+
 
      console.log('frank')
    }
@@ -218,8 +223,7 @@ function startNewGame(cards) {
    activateCards();
 
    // reset moves
-   moves = 0;
-   moves.innerHTML = moves;
+
 
   }
 
@@ -233,7 +237,6 @@ function win()
     stopTimer();
   alert (`Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?`);
   startNewGame(cards)
-  stopTimer();
 }
 
 }
@@ -241,7 +244,7 @@ function win()
 $(document).ready(function(){
   displayCards(cards);
   activateCards();
-  startNewGame(cards);
+  // startNewGame(cards);
 });
 
 
