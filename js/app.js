@@ -91,9 +91,20 @@ if (moves > 16 && moves < 20) {
 }
 
 
-function increaseMoves() {
+function addStar(){
 
+  $('.one').addClass('fa fa-star');
+  $('.two').addClass('fa fa-star');
+  $('.three').addClass('fa fa-star');
+}
+
+function increaseMoves() {
   moves++;
+  moveCounter.innerText = moves;
+}
+
+function resetMoves(){
+  moves = 0;
   moveCounter.innerText = moves;
 }
 
@@ -144,9 +155,7 @@ function activateCards() {
       myTimer()
     }
 
-    // moves = $('.moves').html(function(i, val) { return val*1+1 });
-
-    $(this).addClass('open show');
+  $(this).addClass('open show');
 
   if (moves % 2 != 0) {
     card1 = $(this);
@@ -168,7 +177,6 @@ function activateCards() {
       card1.removeClass('open show');
   }, 800);
     }
-
 }
 win();
 })
@@ -188,24 +196,14 @@ function shuffle(array) {
    return array;
 }
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
  function displayCards(cards) {
    $( '.restart' ).on( 'click', function () {
      resetTimer();
-     moves = 0;
-     moves.innerHTML = moves;
+     resetMoves();
      startNewGame(cards);
-
 
      console.log('frank')
    }
-
 )};
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -221,7 +219,7 @@ function startNewGame(cards) {
      `)
    ))
    activateCards();
-
+   addStar();
    // reset moves
 
 
@@ -234,7 +232,6 @@ function startNewGame(cards) {
 function win()
  {
   if ($('.card.match').length === 16) {
-    stopTimer();
   alert (`Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?`);
   startNewGame(cards)
 }
