@@ -4,6 +4,7 @@
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
+* [Dependencies](#Dependencies)
 
 ## Instructions
 This is a matching memory game. Once the player clicks the first card, a timer begins as well as a moves tracker that records how many clicks the player has taken.
@@ -16,3 +17,8 @@ The player will begin the game with three stars. Once the player has clicked 20 
 ## Contributing
 
 This repository is the a project for Udacity students. Therefore, I won't likely accept pull requests.
+
+
+##Dependencies
+
+This projects uses font-awesome, google fonts, and jquery. 
