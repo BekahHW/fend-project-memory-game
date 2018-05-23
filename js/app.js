@@ -75,6 +75,7 @@ const starOne = $('starOne');
 const starTwo = $('starTwo');
 const starThree = $('starThree');
 
+
 // star functions
 function removeStar(moves){
 
@@ -113,7 +114,7 @@ let interval;
 
 function myTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = minute+"mins "+second+"secs";
+        timer.innerHTML = minute+'mins'+second+'secs';
         second++;
         if(second == 60){
             minute++;
@@ -170,7 +171,6 @@ function activateCards() {
 }
 win();
 })
-
 };
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -189,6 +189,7 @@ function shuffle(array) {
 
  function displayCards(cards) {
    $( '.restart' ).on( 'click', function () {
+     closeModal()
      resetTimer();
      resetMoves();
      startNewGame(cards);
@@ -208,17 +209,51 @@ function startNewGame(cards) {
    ))
    activateCards();
    addStar();
+
   }
+
+let modal
+function initModal() {
+  modal = $('#myModal')
+  // When the user clicks anywhere outside of the modal, close it
+  $('.modal').click(function() {
+    if ($(this).class() !== 'modal-content') {
+        closeModal()
+    }
+
+  })
+   let starScore = $('.fa-star').length;
+   let timeScore= $('.timer').html();
+   closeModal()
+}
+
+// can change modal.show() to modal.addclass(show) and create the css for show
+function openModal() {
+  modal.show()
+  let starScore = $('.fa-star').length;
+  let timeScore = $('.timer').html();
+  console.log(starScore)
+
+  $('#printStars').html(starScore)
+  $('#timeScore').html(timeScore)
+}
+
+function closeModal() {
+  modal.hide()
+}
+
 
 function win()
  {
-  if ($('.card.match').length === 16) {
-  alert (`Congratulations! It took you ${timer.innerHTML} seconds. You earned ${$('.fa-star').length} stars. Would you like to play again?`);
-  startNewGame(cards)
-}
-}
+     if ($('.card.match').length > 0) {
+   // Get the <span> element that closes the modal
+   openModal()
+   resetTimer()
+
+}}
 
 $(document).ready(function(){
+  initModal();
   displayCards(cards);
   activateCards();
   startNewGame(cards);
