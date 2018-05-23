@@ -245,7 +245,7 @@ function closeModal() {
 
 function win()
  {
-     if ($('.card.match').length > 0) {
+     if ($('.card.match').length === 16) {
    // Get the <span> element that closes the modal
    openModal()
    resetTimer()
