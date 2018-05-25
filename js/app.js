@@ -145,11 +145,24 @@ function resetTimer() {
 //     $('.card').removeClass('disable')
 //   }
 // }
+
+function disableCards() {
+  if (moves%2 === 0 && moves != 0) {
+    $('.card').addClass('disable');
+  }
+  else {
+    $('.card').removeClass('disable')
+  }
+}
+
+
 function activateCards() {
+
   let card1, card2
 
   $('.card').click(function() {
     increaseMoves();
+    disableCards();
     removeStar(moves);
     // disableCards();
 
@@ -170,22 +183,20 @@ function activateCards() {
     $(this).addClass('match');
     card1.addClass('match');
     card1.removeClass('open show');
+    $('.card').removeClass('disable')
   }
 
   else {
     setTimeout(function() {
       card2.removeClass('open show');
       card1.removeClass('open show');
-  }, 800);
-    }
-    if (card1 && card2 === 'open show') {
-      $('.card').addClass('disable');
-      console.log('blankes')
-    }
-    else {
       $('.card').removeClass('disable')
+
+  }, 500);
     }
+
 }
+
 win();
 })
 };
